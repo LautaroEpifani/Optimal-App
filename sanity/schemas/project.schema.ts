@@ -35,7 +35,7 @@ const schema = {
               { title: 'Docker', value: 'docker' },
               { title: 'AWS', value: 'aws' },
               { title: 'Node', value: 'node' },
-              { title: 'Mongo Db', value: 'mongo' },
+              { title: 'Mongo Db', value: 'mongodb' },
               { title: 'Laravel', value: 'laravel' },
             ],
           },

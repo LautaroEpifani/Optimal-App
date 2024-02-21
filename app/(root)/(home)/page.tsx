@@ -1,17 +1,24 @@
 import Filters from '@/components/Filters';
+import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
 import SearchForm from '@/components/SearchForm';
-import { getProjects } from '@/sanity/actions';
+import { getProjectList, getProjects } from '@/sanity/actions';
 import React from 'react';
 
-const Page = async () => {
+interface Props {
+  searchParams: { [key: string]: string | undefined };
+}
+
+
+
+const Page = async ({ searchParams }: Props) => {
   const projects = await getProjects({
-    query: '',
-    technology: '',
+    query: searchParams?.query || '',
+    technology: searchParams?.technology || '',
     page: '1',
   });
 
-  // console.log(projects);
+  const projectList = await getProjectList();
 
   return (
     <main className='w-full flex-center paddings mx-auto  max-w-screen-2xl flex-col'>
@@ -23,25 +30,49 @@ const Page = async () => {
         <SearchForm />
       </section>
       <Filters />
-      <section className='flex-center mt-6 w-full flex-col sm:mt-20'>
-        Header
-        <div className='mt-12 flex w-full flex-wrap justify-center gap-16 sm:justify-start'>
-          {projects?.length > 0 ? (
-            projects.map((project: any) => (
-              <ProjectCard
-                key={project._id}
-                title={project.title}
-                id={project._id}
-                image={project.image}
-                projectLink={project.projectLink}
-                slug={project.slug}
-              />
-            ))
-          ) : (
-            <p className='body-regular text-white-400'>No Projects Found</p>
-          )}
-        </div>
-      </section>
+
+      {(searchParams?.query || searchParams?.technology) && (
+        <section className='flex-center mt-6 w-full flex-col sm:mt-20'>
+          <Header
+            type='Projects'
+            query={searchParams?.query || ''}
+            technology={searchParams?.technology || ''}
+          />
+          <div className='mt-12 flex w-full flex-wrap justify-center gap-16 sm:justify-start'>
+            {projects?.length > 0 ? (
+              projects.map((project: any) => (
+                <ProjectCard
+                  key={project._id}
+                  title={project.title}
+                  id={project._id}
+                  image={project.image}
+                  projectLink={project.projectLink}
+                />
+              ))
+            ) : (
+              <p className='body-regular text-white-400'>No Projects Found</p>
+            )}
+          </div>
+        </section>
+      )}
+      {projectList.map((item: any) => (
+        <section key={item._id} className='flex-center mt-6 w-full flex-col sm:mt-20'>
+            <h1 className='heading3 self-start text-white-800'>{item.title}</h1>
+            <div className='mt-12 flex w-full flex-wrap justify-center gap-16 sm:justify-start'>
+              {
+                 item.projects.map((project: any) => (
+                  <ProjectCard
+                    key={project._id}
+                    title={project.title}
+                    id={project._id}
+                    image={project.image}
+                    projectLink={project.projectLink}
+                  />
+                 ))
+              }
+            </div>
+        </section>
+      ))}
     </main>
   );
 };
