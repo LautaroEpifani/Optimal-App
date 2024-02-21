@@ -9,7 +9,6 @@ const SearchForm = () => {
   const [search, setSearch] = useState('');
   const searchParams = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -37,16 +36,16 @@ const SearchForm = () => {
     <form className='flex-center mx-auto mt-10 w-full sm:-mt-10 sm:px-5'>
       <label className='flex-center relative w-full max-w-3xl'>
         <Image
-          className='absolute left-8'
-          src='/magnifying-glass.svg'
+          className='absolute left-8 '
+          src='/searchIcon.svg'
           alt='search icon'
           width={32}
           height={32}
         />
         <Input
           type='text'
-          placeholder='Search'
-          className='base-regular h-fit border-0 bg-black-400 py-6 pl-20 pr-8 text-white-800 !ring-0 !ring-offset-0 placeholder:text-white-800'
+          placeholder='Search project'
+          className='base-regular h-fit border-0 bg-white py-6 pl-20 pr-8 text-[#333333] !ring-0 !ring-offset-0 placeholder:text-[#333333]'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />

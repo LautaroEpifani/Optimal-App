@@ -21,18 +21,18 @@ const Page = async ({ searchParams }: Props) => {
   const projectList = await getProjectList();
 
   return (
-    <main className='w-full flex-center paddings mx-auto  max-w-screen-2xl flex-col'>
+    <main className='w-full flex-center paddings mx-auto  flex-col'>
       <section className='w-full nav-padding'>
-        <h1 className='sm:heading1 heading2 text-center text-white mb-4'>
-          Projects
+        <h1 className='heading2 text-center text-white mb-10'>
+           Enhanced Website Performance and SEO
         </h1>
-        <div className=' w-full flex  items-start  justify-center relative min-h-[274px] rounded-xl bg-banner bg-cover bg-center text-center'></div>
+        <div className=' w-full flex  items-start  justify-center relative min-h-[290px] rounded-xl bg-banner bg-cover bg-center text-center'></div>
         <SearchForm />
       </section>
       <Filters />
 
       {(searchParams?.query || searchParams?.technology) && (
-        <section className='flex-center mt-6 w-full flex-col sm:mt-20'>
+        <section className='flex-center mt-6 w-full flex-col'>
           <Header
             type='Projects'
             query={searchParams?.query || ''}
@@ -56,7 +56,7 @@ const Page = async ({ searchParams }: Props) => {
         </section>
       )}
       {projectList.map((item: any) => (
-        <section key={item._id} className='flex-center mt-6 w-full flex-col sm:mt-20'>
+        <section key={item._id} className='flex-center mb-20 w-full flex-col'>
             <h1 className='heading3 self-start text-white-800'>{item.title}</h1>
             <div className='mt-12 flex w-full flex-wrap justify-center gap-16 sm:justify-start'>
               {

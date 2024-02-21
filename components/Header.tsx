@@ -10,7 +10,7 @@ const Header = ({ type, query, technology }: Props) => {
   if (query && technology) {
     return (
       <h1 className='heading3 self-start text-white-800'>
-        Sarch results for "{query}" in {type}{' '}
+        Search results for "{query}" in {type}{' '}
         with technology: <span className='capitalize'>{technology}</span>
       </h1>
     );
