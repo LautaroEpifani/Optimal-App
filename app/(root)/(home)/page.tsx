@@ -32,7 +32,7 @@ const Page = async ({ searchParams }: Props) => {
       <Filters />
 
       {(searchParams?.query || searchParams?.technology) && (
-        <section className='flex-center mt-6 w-full flex-col'>
+        <section className='flex-center mt-6 mb-20 w-full flex-col'>
           <Header
             type='Projects'
             query={searchParams?.query || ''}
